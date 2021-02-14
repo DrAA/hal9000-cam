@@ -41,19 +41,19 @@ def shift_image(img, dx, dy):
 
 def hologram_effect(img):
     # add a blue tint
-    holo = cv2.applyColorMap(img, cv2.COLORMAP_WINTER)
+    holo = cv2.applyColorMap(img, cv2.COLORMAP_HOT)
     # add a halftone effect
-    bandLength, bandGap = 2, 3
+    bandLength, bandGap = 1, 4
     for y in range(holo.shape[0]):
         if y % (bandLength+bandGap) < bandLength:
-            holo[y, :, :] = holo[y, :, :] * np.random.uniform(0.1, 0.3)
+            holo[y, :, :] = holo[y, :, :] * np.random.uniform(0.3, 0.3)
     # add some ghosting
     holo_blur = cv2.addWeighted(
-        holo, 0.2, shift_image(holo.copy(), 5, 5), 0.8, 0)
+        holo, 0.7, shift_image(holo.copy(), 3, 3), 0.8, 0)
     holo_blur = cv2.addWeighted(
-        holo_blur, 0.4, shift_image(holo.copy(), -5, -5), 0.6, 0)
+        holo_blur, 0.8, shift_image(holo.copy(), -3, -3), 0.9, 0)
     # combine with the original color, oversaturated
-    out = cv2.addWeighted(img, 0.5, holo_blur, 0.6, 0)
+    out = cv2.addWeighted(img, 0.7, holo_blur, 0.3, 0)
     return out
 
 
@@ -70,7 +70,7 @@ def get_frame(cap, background_scaled):
             time.sleep(1)
     # post-process mask and frame
     mask = post_process_mask(mask)
-    # frame = hologram_effect(frame)
+    frame = hologram_effect(frame)
     # composite the foreground and background
     inv_mask = 1-mask
     for c in range(frame.shape[2]):
