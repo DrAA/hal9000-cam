@@ -1,7 +1,7 @@
 FROM nvcr.io/nvidia/cuda:10.0-cudnn7-runtime-ubuntu18.04
 
-RUN apt update && apt install -y curl make build-essential \
-    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+RUN apt-get update && apt-get install -y curl make build-essential \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get -y install nodejs \
     && mkdir /.npm \
     && chmod 777 /.npm

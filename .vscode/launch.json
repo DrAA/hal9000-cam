@@ -10,6 +10,17 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "capture.py",
+            "type": "python",
+            "request": "launch",
+            "program": "capture/capture.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bodypix-url=http://localhost:9000",
+                "--background-path=capture/background.png"
+            ]
         }
     ]
 }

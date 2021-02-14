@@ -1,26 +1,23 @@
 version: "3.9"  # optional since v1.27.0
 services:
 
-  bodyfix:
+  bodypix:
     build:
-      context: bodyfix
+      context: bodypix
     ports:
       - "9000:9000"
     # runtime: nvidia
     user: ${CURRENT_UID}
 
-  fakecam:
+  capture:
     build:
-      context: fakecam
+      context: capture
     depends_on:
-      - bodyfix
+      - bodypix
     devices:
       - "/dev/video0"
-      - "/dev/video1"
       - "/dev/video20"
     user: ${CURRENT_UID}
-
-# networks:
-#   fakecam:
-#     external:
-#       name: fakecam
+    environment:
+      - BACKGROUND_PATH
+      - HOLOGRAM

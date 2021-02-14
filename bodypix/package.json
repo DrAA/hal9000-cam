@@ -1,0 +1,8 @@
+{
+    "name": "bodypix",
+    "version": "0.0.1",
+    "dependencies": {
+        "@tensorflow-models/body-pix": "latest",
+        "@tensorflow/tfjs-node-gpu": "latest"
+    }
+}
