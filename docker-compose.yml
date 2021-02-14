@@ -1,0 +1,26 @@
+version: "3.9"  # optional since v1.27.0
+services:
+
+  bodyfix:
+    build:
+      context: bodyfix
+    ports:
+      - "9000:9000"
+    # runtime: nvidia
+    user: ${CURRENT_UID}
+
+  fakecam:
+    build:
+      context: fakecam
+    depends_on:
+      - bodyfix
+    devices:
+      - "/dev/video0"
+      - "/dev/video1"
+      - "/dev/video20"
+    user: ${CURRENT_UID}
+
+# networks:
+#   fakecam:
+#     external:
+#       name: fakecam
