@@ -1,12 +1,20 @@
-# Installation
+# HAL 9000 cam
 
-https://elder.dev/posts/open-source-virtual-background/
+A docker-compose version of
+[Elder's fakecam code](https://elder.dev/posts/open-source-virtual-background/)
+that captures the `/dev/video0/` camera, performs person segmentation using the
+[TensorFlow body-pix model](https://github.com/tensorflow/tfjs-models/tree/master/body-pix),
+adds a HAL 9000 background and some hologram effects to the real-time camera.
+A new fake camera called `hal9000_cam` is created that can be used in any
+video conferencing system such as Google Meet, Teams, or Zoom.
+
+![HAL 9000](https://raw.githubusercontent.com/DrAA/hal9000-cam/master/capture/background.png)
+
+# Installation
 
 ```bash
 sudo apt install v4l2loopback-dkms
 sudo modprobe -r v4l2loopback
-sudo modprobe v4l2loopback devices=1 video_nr=20 card_label="v4l2loopback" exclusive_caps=1
-sudo chmod +rw /dev/video20
 ```
 
 # Building
@@ -18,12 +26,6 @@ make build
 # Running
 
 ```bash
-# docker run --rm   --name=bodypix   --network=fakecam   -p 9000:9000   --gpus=all --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864   bodypix
-
-# docker run --rm --name=fakecam   --network=fakecam   -u "$(id -u):$(getent group video | cut -d: -f3)"   $(sudo find /dev -name 'video*' -printf "--device %p ") fakecam
-
-# -itu0 --entrypoint bash
-
 make run
 ```
 
