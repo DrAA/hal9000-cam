@@ -12,7 +12,9 @@ from tqdm import tqdm
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument('--realcam-dev', default='/dev/video0')
+    parser.add_argument(
+        '--realcam-dev',
+        default=os.getenv('CAMERA', '/dev/video0'))
     parser.add_argument('--fakecam-dev', default='/dev/video20')
     parser.add_argument('--width', default=848, type=int)
     parser.add_argument('--height', default=480, type=int)
@@ -134,7 +136,8 @@ def main():
     background = setup_background()
 
     print(
-        f'Starting capture using background {args.background_path} and '
+        f'Starting capture from camera {args.realcam_dev} '
+        f'using background {args.background_path} and '
         f'hologram effects {args.hologram}')
     for frame_index in tqdm(itertools.count(), unit=' frames'):
         frame = get_frame(realcam, background)

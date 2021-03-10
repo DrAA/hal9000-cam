@@ -15,9 +15,10 @@ services:
     depends_on:
       - bodypix
     devices:
-      - "/dev/video0"
+      - ${CAMERA}
       - "/dev/video20"
     user: ${CURRENT_UID}
     environment:
       - BACKGROUND_PATH
       - HOLOGRAM
+      - CAMERA

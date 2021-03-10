@@ -1,5 +1,6 @@
 FROM python:3-slim-buster
 ARG BACKGROUND_PATH
+ARG CAMERA
 
 RUN pip install --upgrade pip
 RUN apt-get update && \

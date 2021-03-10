@@ -30,8 +30,8 @@ make run
 ```
 
 To remove the hologram effects, set the `HOLOGRAM` env to 0 (no effect) or
-1 (only some blurring), instead of default 2 (all effects).
+1 (only some blurring), instead of default 2 (all effects). To change input camera device, set the `CAMERA` env variable.
 
 ```bash
-HOLOGRAM=0 make run
+HOLOGRAM=0 CAMERA=/dev/video2 make run
 ```
