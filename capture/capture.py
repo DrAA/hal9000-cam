@@ -16,7 +16,7 @@ def parse_args():
         '--realcam-dev',
         default=os.getenv('CAMERA', '/dev/video0'))
     parser.add_argument('--fakecam-dev', default='/dev/video20')
-    parser.add_argument('--width', default=848, type=int)
+    parser.add_argument('--width', default=800, type=int)
     parser.add_argument('--height', default=480, type=int)
     parser.add_argument('--fps', default=60, type=int)
     parser.add_argument('--bodypix-url', default='http://bodypix:9000')
