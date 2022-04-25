@@ -5,7 +5,7 @@ export BACKGROUND_PATH ?= background.png
 export HOLOGRAM ?= 2
 export CAMERA ?= /dev/video0
 
-.PHONY: train
+.PHONY: build
 build:
 	docker-compose build
 
@@ -16,3 +16,7 @@ enable_video20:
 .PHONY: run
 run: enable_video20
 	docker-compose up
+
+.PHONY: reload
+reload:
+	sudo modprobe -r v4l2loopback
